@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💌 Surprise Untuk Yaya 💛</title>
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+<style>
+html,body { margin:0; padding:0; font-family:'Indie Flower',cursive; height:100%; }
+
+/* 🌸 Landing Page */
+#landing {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background:linear-gradient(135deg,#ffdee9,#fff1f5);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  z-index:9999; animation:fadeIn 2s ease; overflow:hidden;
+}
+#landing h1 { color:#ff4d6d; font-size:2.5em; animation:pulseText 2s infinite alternate; text-align:center; }
+#landing button {
+  margin-top:30px; padding:12px 35px; font-size:1.3em; border:none; border-radius:30px;
+  background:linear-gradient(45deg,#ff4d6d,#ff99c8); color:#fff; cursor:pointer;
+  box-shadow:0 0 15px rgba(255,120,150,0.5); transition:transform .3s;
+}
+#landing button:hover { transform:scale(1.1); box-shadow:0 0 25px rgba(255,80,130,0.7); }
+@keyframes pulseText {0%{transform:scale(1);}100%{transform:scale(1.1);}}
+@keyframes fadeIn {from{opacity:0;}to{opacity:1;}}
+@keyframes fadeOut {from{opacity:1;}to{opacity:0;}}
+
+/* ❤️ Hujan Love di Landing */
+.love-fall { position:absolute; top:-30px; font-size:25px; animation:fall 6s linear forwards; }
+@keyframes fall {0%{transform:translateY(0)rotate(0);}100%{transform:translateY(120vh)rotate(360deg);opacity:0;}}
+
+/* 💌 Konten SKY LOVE */
+#content { opacity:0; pointer-events:none; transition:opacity 1.5s ease; height:100%; overflow-y:auto; background:#fff; }
+#content.show { opacity:1; pointer-events:auto; }
+
+/* 🌟 Style Surat SKY LOVE */
+body { background: radial-gradient(circle at top,#ffe4ec,#fff8f9); color:#333; }
+body.peluk-bg { background: radial-gradient(circle,#ffccdc,#fff0f5); animation:pulseBg 2s infinite alternate; }
+@keyframes pulseBg {0%{background:#ffdce5;}100%{background:#ffc7da;}}
+
+.card { max-width:850px; margin:30px auto; background:rgba(255,255,255,0.6); backdrop-filter:blur(8px);
+        padding:25px; border-radius:20px; box-shadow:0 8px 25px rgba(0,0,0,0.1); }
+h1 { text-align:center; color:#ff6f91; font-size:2.3em; animation:fadeIn 2s ease forwards; opacity:0; }
+.typewriter,.reply-typing { font-size:1.2em; line-height:1.9; margin:15px 0; white-space:pre-wrap; border-right:2px solid #ff6f91; overflow:hidden; animation:blink 1s step-end infinite; }
+@keyframes blink {50%{border-color:transparent;}}
+
+.signature { text-align:right; font-style:italic; margin-top:30px; font-size:1.1em; color:#ff8fa3; animation:fadeIn 2s ease 1.5s forwards; opacity:0; }
+.heart { text-align:center; font-size:2.5em; color:#ff4d6d; animation:heartbeat 1.5s infinite ease-in-out; }
+
+.btn-peluk,.btn-reply,.btn-double { display:block; margin:20px auto; padding:10px 25px; border:none; border-radius:30px;
+  font-size:1.2em; color:white; background:linear-gradient(45deg,#ff4d6d,#ff9fbf); cursor:pointer; box-shadow:0 4px 15px rgba(255,100,150,0.3); transition:.3s; }
+.btn-peluk:hover,.btn-reply:hover,.btn-double:hover { transform:scale(1.08); }
+.btn-double { display:none; background:linear-gradient(45deg,#ff2965,#ff8ac6); font-weight:bold; }
+
+.reply-box { background:rgba(255,255,255,0.5); padding:15px; border-radius:15px; }
+.reply-box textarea { width:100%; height:100px; border:2px solid #ffb3c6; border-radius:10px; padding:10px; font-family:'Indie Flower'; font-size:1.1em; }
+.reply-message { margin-top:15px; background:#ffe4eb; padding:12px 18px; border-radius:20px 20px 20px 5px; border:1px solid #ffb3c6; animation:fadeIn 1s ease forwards; }
+
+@keyframes heartbeat {0%,100%{transform:scale(1);}50%{transform:scale(1.2);}}
+
+/* GIF Peluk */
+.hug-gif { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.5); opacity:0; z-index:1000;
+           border-radius:15px; box-shadow:0 0 20px rgba(255,120,150,0.4); transition:.5s; }
+.hug-gif.show { opacity:1; transform:translate(-50%,-50%) scale(1); }
+
+/* Hati & Glow */
+.love-rain { position:fixed; top:-50px; font-size:25px; animation:fall 6s linear forwards; }
+.glow { position:fixed; width:5px; height:5px; background:rgba(255,100,150,0.7); border-radius:50%; animation:glowAnim 3s infinite; }
+@keyframes glowAnim {0%{opacity:.3;transform:scale(.5);}50%{opacity:1;transform:scale(1);}100%{opacity:0;transform:scale(.3);}}
+
+/* Fireworks Canvas */
+#fireworksCanvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:999; pointer-events:none; }
+</style>
+</head>
+<body>
+
+<!-- 🌸 Landing Page -->
+<div id="landing">
+  <h1>💌 Ada Surat Spesial Untuk Yaya 💛</h1>
+  <button onclick="openLetter()">💖 Buka Surat 💖</button>
+</div>
+
+<!-- 💌 Konten Surat Sky Love -->
+<div id="content">
+  <canvas id="fireworksCanvas"></canvas>
+  <div class="card">
+    <h1>Untuk Yaya 💛</h1>
+    <p class="typewriter" data-text="Sayang,"></p>
+    <p class="typewriter" data-text="Makasih ya… Makasih udah selalu ada buat aku.  
+Makasih udah sabar dengerin semua curhat dan kekesalanku, tanpa pernah ngeluh."></p>
+    <p class="typewriter" data-text="Maaf kalau aku belum bisa jadi cewek yang pengertian.  
+Maaf kalau aku belum bisa jadi tempat ternyaman buat kamu cerita."></p>
+    <p class="typewriter" data-text="Aku tahu, kadang kamu susah buat nyeritain semua hal yang kamu rasain… dan nggak apa-apa kok, aku ngerti."></p>
+    <p class="typewriter" data-text="Aku cuma mau kamu tahu… kapan pun kamu siap cerita, aku selalu ada.  
+Selalu siap dengerin, nemenin, dan jadi tempat kamu pulang."></p>
+    <div class="signature">Love you, Yaya 🌼</div>
+    <div class="heart">❤</div>
+    <button class="btn-peluk" onclick="pelukYaya()">🤗 Kirim Peluk Virtual</button>
+    <button class="btn-double" id="doubleHug" onclick="doubleHug()">💞 Double Hug Mode!</button>
+
+    <div class="reply-box">
+      <h3>Tulis Balasanmu 💌</h3>
+      <textarea id="replyText" placeholder="Tulis pesan balasanmu di sini..."></textarea>
+      <button class="btn-reply" onclick="kirimBalasan()">Kirim Balasan</button>
+      <div id="replyContainer"></div>
+    </div>
+  </div>
+  <img id="hugGif" class="hug-gif" src="https://media.giphy.com/media/wnsgren9NtITS/giphy.gif" width="250">
+</div>
+
+<!-- Audio -->
+<audio id="uwuSound" src="https://actions.google.com/sounds/v1/human_voices/aww.ogg"></audio>
+<audio id="loveWhisper" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_b6b0e28b2e.mp3?filename=i-love-you-111291.mp3"></audio>
+<audio id="bgm" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// 🎀 Hujan Love di Landing
+function loveRain(){let h=document.createElement('div');h.className='love-fall';
+h.innerHTML=['💖','❤️','💗','🌸'][Math.floor(Math.random()*4)];
+h.style.left=Math.random()*100+'%';document.getElementById('landing').appendChild(h);setTimeout(()=>h.remove(),6000);}
+setInterval(loveRain,500);
+
+// 🎵 Buka Surat
+function openLetter(){
+  document.getElementById('landing').style.animation="fadeOut 1s forwards";
+  document.getElementById('bgm').play();
+  setTimeout(()=>{
+    document.getElementById('landing').style.display="none";
+    document.getElementById('content').classList.add('show');
+    startSkyLove();
+  },1000);
+}
+
+// 💌 Efek Ketikan
+function typeWriterEffect(el,text,delay,cb){let i=0;el.textContent="";(function type(){if(i<text.length){el.textContent+=text.charAt(i++);setTimeout(type,delay);}else{el.style.borderRight='none';if(cb)cb();}})();}
+const ps=document.querySelectorAll(".typewriter");let idx=0;function nextP(){if(idx<ps.length){let p=ps[idx],t=p.dataset.text;if(t)typeWriterEffect(p,t,40,()=>{idx++;nextP();});}}
+function startSkyLove(){nextP();setTimeout(()=>document.getElementById("doubleHug").style.display="block",5000);setInterval(rainLove,1000);glowParticles();setInterval(glowParticles,6000);}
+
+// ❤️ Balasan
+function kirimBalasan(){let t=document.getElementById("replyText").value.trim();if(!t)return alert("Kamu belum menulis apa-apa 💌");
+let c=document.getElementById("replyContainer");let b=document.createElement("div");b.className="reply-message";
+let s=document.createElement("span");s.className="reply-typing";b.appendChild(s);c.appendChild(b);
+typeWriterEffect(s,"💌 Yaya membalas: "+t,40);document.getElementById("replyText").value="";}
+
+// 💖 Efek Love & Glow
+function tampilkanHeart(e){let h=document.createElement('div');h.className='love-rain';h.innerHTML='💗';h.style.left=e.pageX+'px';document.body.appendChild(h);setTimeout(()=>h.remove(),6000);}
+function rainLove(){const e=document.createElement('div');e.className='love-rain';e.innerHTML=['💖','🌸','✨','❤️'][Math.floor(Math.random()*4)];e.style.left=Math.random()*100+'%';document.body.appendChild(e);setTimeout(()=>e.remove(),6000);}
+function glowParticles(){for(let n=0;n<15;n++){setTimeout(()=>{let g=document.createElement('div');g.className='glow';g.style.left=Math.random()*100+'%';g.style.top=Math.random()*100+'%';document.body.appendChild(g);setTimeout(()=>g.remove(),4000);},n*100);}}
+
+// 🤗 Pelukan
+const hugGifs=["https://media.giphy.com/media/wnsgren9NtITS/giphy.gif","https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif","https://media.giphy.com/media/od5H3PmEG5EVq/giphy.gif"];
+function pelukEffect(){for(let j=0;j<5;j++){setTimeout(rainLove,j*300);}}
+function pelukYaya(){
+  const gif=document.getElementById("hugGif");
+  gif.src=hugGifs[Math.floor(Math.random()*hugGifs.length)]+"?"+Date.now();
+  gif.classList.add("show");
+  document.body.classList.add("peluk-bg");
+  document.getElementById("uwuSound").play();
+  setTimeout(()=>document.getElementById("loveWhisper").play(),600);
+  if(navigator.vibrate)navigator.vibrate([200,100,200]);
+  pelukEffect();launchSkyLove();
+  setTimeout(()=>{gif.classList.remove("show");document.body.classList.remove("peluk-bg");},4000);
+}
+function doubleHug(){pelukYaya();setTimeout(pelukYaya,2500);}
+
+// 🎆 Fireworks LOVE
+const canvas=document.getElementById("fireworksCanvas"),ctx=canvas.getContext("2d");
+canvas.width=innerWidth;canvas.height=innerHeight;window.onresize=()=>{canvas.width=innerWidth;canvas.height=innerHeight;};
+class Particle{constructor(x,y,color,vx,vy){this.x=x;this.y=y;this.color=color;this.alpha=1;this.vx=vx;this.vy=vy;}
+update(){this.x+=this.vx;this.y+=this.vy;this.alpha-=0.01;}draw(){ctx.globalAlpha=this.alpha;ctx.fillStyle=this.color;ctx.beginPath();ctx.arc(this.x,this.y,2,0,Math.PI*2);ctx.fill();}}
+let particles=[];
+function launchSkyLove(){let text="I ❤️ YAYA",centerX=canvas.width/2,centerY=canvas.height/3;
+for(let i=0;i<text.length*30;i++){particles.push(new Particle(centerX+Math.cos(i/10)*Math.random()*100,centerY+Math.sin(i/10)*Math.random()*50,['#ff4d6d','#ff99c8','#ffd1dc'][i%3],Math.random()*2-1,Math.random()*2-1));}}
+function animate(){requestAnimationFrame(animate);ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach((p,i)=>{p.update();p.draw();if(p.alpha<=0)particles.splice(i,1);});}
+animate();
+</script>
+</body>
+</html>
